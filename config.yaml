@@ -1,0 +1,68 @@
+# Adaptive Inference Router Configuration
+
+# Routing thresholds and policy
+routing:
+  # Pre-inference routing thresholds (input-only signals, no model inference)
+  # These determine if we skip fast model and route directly to slow model
+  pre_inference_length_threshold: 150
+  pre_inference_word_count_threshold: 20
+  pre_inference_lexical_diversity_threshold: 0.85
+  
+  # Post-inference routing thresholds (fast model output signals)
+  # Confidence margin threshold: if fast model confidence margin is below this,
+  # route to slow model. Confidence margin = max_prob - second_max_prob
+  confidence_margin_threshold: 0.3
+  
+  # Entropy threshold: if output entropy is above this, route to slow model
+  # Higher entropy = more uncertainty
+  entropy_threshold: 0.8
+  
+  # Minimum fast model confidence: if fast model max probability is below this,
+  # route to slow model regardless of other signals
+  min_confidence_threshold: 0.6
+  
+  # Latency budget constraint (optional)
+  latency_budget_enabled: false
+  latency_budget_ms: 50.0
+  latency_budget_percentile: 0.95
+
+# Model configurations
+models:
+  fast:
+    # Simulated latency in milliseconds
+    latency_ms: 10
+    # Model accuracy (for simulation)
+    accuracy: 0.85
+    # Model name/identifier
+    name: "fast_approximate"
+    
+  slow:
+    # Simulated latency in milliseconds
+    latency_ms: 100
+    # Model accuracy (for simulation)
+    accuracy: 0.95
+    # Model name/identifier
+    name: "slow_accurate"
+
+# Evaluation settings
+evaluation:
+  # Number of samples for evaluation
+  num_samples: 1000
+  # Random seed for reproducibility
+  seed: 42
+  # Output directory for evaluation results
+  output_dir: "results"
+
+# Logging settings
+logging:
+  # Enable detailed routing decision logs
+  enabled: true
+  # Log file path
+  log_file: "routing_decisions.log"
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+
+# Compute cost weights (relative cost per inference)
+cost:
+  fast_model_cost: 1.0
+  slow_model_cost: 10.0
