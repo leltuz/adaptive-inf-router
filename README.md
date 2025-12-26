@@ -413,4 +413,5 @@ adaptive-inference-router/
 
 ## License
 
-This is a demonstration system for educational and engineering purposes.
+This project is released under the MIT License. See the LICENSE file for details.
+Provided for research, educational, and demonstration purposes, without warranty of any kind.
