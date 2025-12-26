@@ -1,6 +1,22 @@
 # Adaptive Inference Router
 
-A production-inspired system for dynamically routing machine learning inference requests between fast approximate and slow accurate inference paths. The system reduces latency and compute cost while maintaining acceptable accuracy by intelligently selecting the appropriate inference path based on input difficulty estimation.
+## TL;DR
+A production-inspired system for adaptive inference routing that dynamically balances latency, cost, and accuracy by routing inputs between fast and slow models using transparent, deterministic, threshold-based policies.
+
+**Why this works:**
+- Signals systems design without claiming production readiness
+- Emphasizes routing logic and trade-offs, not model novelty
+- Aligns with your focus on efficiency, transparency, and control
+- Avoids research-overclaim (no “optimal,” no “learning,” no “intelligent agent” language)
+
+## How to Read this README
+This README is written as a systems design and evaluation document, not a deployment guide.
+- **For motivation and problem context:** Read *Problem Statement* and *Why Naive Always-On Inference is Inefficient* to understand the inefficiency this system addresses.
+- **For system design and routing logic:** Focus on *Architecture Overview*, *Routing Policy*, and *Design Trade-offs* to understand how two-stage routing, threshold-based policies, and latency constraints are implemented.
+- **For evaluation methodology and evidence:** Read *Offline Evaluation Methodology* and *Results Summary* to see how adaptive routing is measured against always-fast and always-slow baselines.
+- **For engineering judgment and limitations:** Read *Why Threshold-Based Routing (Not Learned Policies)*, *Design Trade-offs*, and *Limitations and Extensions* to understand what was intentionally chosen, sacrificed, and left out.
+
+Sections on _Usage_, _Project Structure_, and _Production Extensions_ are secondary and provided for completeness rather than as the primary contribution.
 
 ## Scope and Out-of-Scope
 
